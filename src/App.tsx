@@ -1,63 +1,54 @@
-import React, {ChangeEvent, useMemo, useState} from 'react';
+import React, {ChangeEvent, useReducer} from 'react';
 import './App.scss';
 import ChangingNumberAnimation from "./components/ChangingNumberAnimation/ChangingNumberAnimation";
 import SpinAnimation from "./components/SpinAnimation/SpinAnimation";
 import SwapAnimation from "./components/SwapAnimation/SwapAnimation";
+import Game from "./Game";
 
-function generateSecret() {
-    return Math.floor(Math.random() * 100 + 1);
+type Action = { type: 'start' }
+    | { type: 'restart' }
+    | { type: 'submitAnswer' }
+    | { type: 'inputValueChanged', value: number | '' }
+
+function GameReducer(game: Game, action: Action): Game {
+    switch (action.type) {
+        case "start":
+            return game.start()
+        case "submitAnswer":
+            return game.submitAnswer()
+        case "inputValueChanged":
+            return game.setInputValue(action.value)
+        case "restart":
+            return game.restart()
+        default:
+            return game
+    }
 }
 
-type GameStatus = 'notStarted' | 'noResponse' | 'below' | 'greater' | 'win'
-
-const hasResponse = (status: GameStatus) => status !== 'noResponse' && status !== 'notStarted'
-
-const getGameStatus = (secret?: number, response?: number): GameStatus => {
-    if (!secret) {
-        return 'notStarted'
-    }
-
-    if (!response) {
-        return 'noResponse'
-    }
-
-    if (response === secret) {
-        return 'win'
-    } else if (response < secret) {
-        return 'below'
-    } else {
-        return 'greater'
-    }
-};
 
 function App() {
-    const [secret, setSecret] = useState<number | undefined>()
-    const [response, setResponse] = useState<number | undefined>()
-    const status = useMemo(() => getGameStatus(secret, response), [response, secret])
+    const [game, dispatch] = useReducer(GameReducer, new Game())
 
-    const [inputValue, setInputValue] = useState<number | ''>('')
+    const status = game.status;
 
-    console.log({
-        status, response, secret
-    })
     const start = () => {
-        setSecret(generateSecret())
+        dispatch({type: 'start'})
     }
 
     const submitAnswer = () => {
-        setResponse(Number(inputValue))
-        setInputValue('')
+        dispatch({type: 'submitAnswer'})
     }
 
     const restart = () => {
-        setResponse(undefined)
-        setSecret(undefined)
-        setInputValue('')
+        dispatch({type: 'restart'})
     }
 
-    const handleInputChange = ({target: {valueAsNumber: value}, }: ChangeEvent<HTMLInputElement>) => {
-        if (1 <= value && value <= 100) {
-            setInputValue(value)
+    const handleInputChange = ({target: {valueAsNumber: value}}: ChangeEvent<HTMLInputElement>) => {
+        console.log({value})
+        if(isNaN(value)) {
+            dispatch({type: 'inputValueChanged', value: ''})
+        } else if (1 <= value && value <= 100) {
+            dispatch({type: 'inputValueChanged', value})
         }
     };
 
@@ -67,14 +58,14 @@ function App() {
                 {status === 'notStarted' && 'Random Number Game'}
                 {status === 'noResponse' && 'What is the secret number'}
                 {status === 'win' && 'You win!'}
-                {(status === 'greater' || status === 'below') && 'Try again!'}
+                {game.inProgress() && 'Try again!'}
             </h1>
 
 
             <div className="big-font">{status === 'below' && 'Too low!'}</div>
             <div className="big-font">{status === 'greater' && 'Too high!'}</div>
 
-            {!hasResponse(status) && (
+            {!game.hasResponse() && (
                 <div className="big-font">
                     <SwapAnimation started={status !== 'notStarted'}>
                         <SpinAnimation started={status !== 'notStarted'}>
@@ -97,9 +88,11 @@ function App() {
                                    max={100}
                                    className="number-input"
                                    type="number"
-                                   value={inputValue}
-                                   onInput={handleInputChange}/>
-                            <button className="ok-button" onClick={submitAnswer} disabled={!inputValue}>✔</button>
+                                   value={game.props.inputValue}
+                                   onInput={handleInputChange}
+                                   onKeyUp={e => e.key === "Enter" && submitAnswer()}/>
+                            <button className="ok-button" onClick={submitAnswer} disabled={!game.props.inputValue}>✔
+                            </button>
                         </div>
                     </div>
                 </SwapAnimation>
