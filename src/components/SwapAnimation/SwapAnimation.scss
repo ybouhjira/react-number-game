@@ -5,26 +5,34 @@
   @include mixins.flex-center;
   position: relative;
 
-  justify-content: space-around;
-
-  &:not(.started) {
-    animation-play-state: paused;
+  .first, .second {
+    transition: all settings.$number-animation-duration ease;
   }
 
+  &.started {
+    .first {
+      pointer-events: none;
+      opacity: 0;
+    }
+    .second {
+      pointer-events: initial;
+      opacity: 1;
+    }
+  }
   .first {
     pointer-events: initial;
     opacity: 1;
-    animation: fade-out settings.$number-animation-duration ease 1 normal forwards;
-    animation-play-state: inherit;
+    //animation: fade-out settings.$number-animation-duration ease 1 normal forwards;
+    //animation-play-state: inherit;
   }
 
   .second {
-
     pointer-events: none;
-    @include mixins.absolute-center;
     opacity: 0;
-    animation: fade-in settings.$number-animation-duration ease 1 normal forwards;
-    animation-play-state: inherit;
+    @include mixins.absolute-center;
+
+    //animation: fade-in settings.$number-animation-duration ease 1 normal forwards;
+    //animation-play-state: inherit;
   }
 }
 

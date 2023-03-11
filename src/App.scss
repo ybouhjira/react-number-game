@@ -15,6 +15,7 @@
   }
 
   .button {
+    margin: 10px;
     display: inline-block;
     padding: 24px !important;
     border-radius: 10px;
@@ -27,16 +28,29 @@
     cursor: pointer;
   }
 
-  .number-input {
-    padding: 10px;
-    border-radius: 10px;
-    border: none;
-    margin: 10px;
-    font-size: 40px;
-    text-align: center;
-    font-weight: bold;
-    width: 150px;
-    color: #9708CC;
+
+  .input-group {
+
+    height: 50px;
+    display: flex;
+    .number-input {
+      padding: 10px;
+      border-radius: 10px 0 0 10px;
+      border: none;
+      font-size: 40px;
+      text-align: center;
+      font-weight: bold;
+      width: 150px;
+      color: #9708CC;
+    }
+
+    .ok-button {
+      color: green;
+      border-radius: 0px 10px 10px 0;
+      background: white;
+      border: none;
+      font-size: 40px;
+    }
   }
 
   color: white;

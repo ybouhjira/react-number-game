@@ -11,15 +11,47 @@ function generateSecret() {
 function App() {
     const [secret, setSecret] = useState<number | null>(null)
     const [response, setResponse] = useState<number | undefined>()
-    const started =  !!secret;
+    const [status, setStatus] = useState<'win' | 'responseBelowSecret' | 'responseGreaterThanSecret'>()
+    const [inputValue, setInputValue] = useState<number | undefined>()
+    const started = !!secret;
 
     const start = () => {
         setSecret(generateSecret())
     }
 
+    const submitAnswer = () => {
+        setResponse(inputValue)
+        if (!response || !secret) {
+            return
+        }
+
+        if (response === secret) {
+            setStatus('win')
+        } else if (response > secret) {
+            setStatus('responseGreaterThanSecret')
+        } else {
+            setStatus('responseBelowSecret')
+        }
+    }
+
+    const reset = () => {
+        setResponse(undefined)
+        setSecret(null)
+        setInputValue(undefined)
+    }
+
     return (
         <div className="App">
-            <h1>{started ? 'What is the secret number' : 'Random Number Game'}</h1>
+            <h1>{!response ? (
+                started ? 'What is the secret number' : 'Random Number Game'
+            ) : (
+                <>
+                    {status === 'win' && 'You win!'}
+                    {status !== 'win' && 'Try again!'}
+                    {status === 'responseBelowSecret' && 'Too low!'}
+                    {status === 'responseGreaterThanSecret' && 'Too High!'}
+                </>
+            )}</h1>
             <div className="number-animation">
                 <SwapAnimation started={started}>
                     <SpinAnimation started={started}>
@@ -28,12 +60,22 @@ function App() {
                     <SpinAnimation started={started} infinite={false}>?</SpinAnimation>
                 </SwapAnimation>
             </div>
-            <SwapAnimation started={started}>
-                <button className="button" onClick={start}>
-                    Start
-                </button>
-                <input className="number-input" type="number" value={response} onChange={e => setResponse(Number(e.target.value))}/>
-            </SwapAnimation>
+
+            {status !== 'win' && (
+                <SwapAnimation started={started}>
+                    <button className="button" onClick={start}>
+                        Start
+                    </button>
+                    <div>
+                        <div className="input-group">
+                            <input className="number-input" type="number" value={inputValue}
+                                   onChange={e => setInputValue(Number(e.target.value))}/>
+                            <button className="ok-button" onClick={submitAnswer}>✔</button>
+                        </div>
+                        <button className="button" onClick={reset}>Reset</button>
+                    </div>
+                </SwapAnimation>
+            )}
         </div>
     );
 }
