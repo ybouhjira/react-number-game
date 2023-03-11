@@ -1,0 +1,12 @@
+.scale-animation {
+  animation: scale 1000ms ease;
+}
+
+@keyframes scale {
+  from {
+    transform: scale(0);
+  }
+  to {
+    transform: scale(1);
+  }
+}

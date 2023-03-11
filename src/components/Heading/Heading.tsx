@@ -7,11 +7,12 @@ interface Props {
     gameInProgress: boolean;
 }
 
-export default function Heading(props: Props) {
-    return <h1 className="heading">
-        {props.status === "notStarted" && "Random Number Game"}
-        {props.status === "noResponse" && "What is the secret number"}
-        {props.status === "win" && "You win!"}
-        {props.gameInProgress && "Try again!"}
-    </h1>;
+export default function Heading({status, gameInProgress}: Props) {
+
+    return <>
+        {status === "notStarted" && <h1 className="heading">Random Number Game</h1>}
+        {status === "noResponse" && <h1 className="heading">What is the secret number</h1>}
+        {status === "win" && <h1 className="heading">You win!</h1>}
+        {gameInProgress && <h1 className="heading">Try again!</h1>}
+    </>;
 }

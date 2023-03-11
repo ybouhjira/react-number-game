@@ -1,4 +1,7 @@
+@use "../../styles/animation";
+
 .heading {
+  @extend .scale-animation;
   max-width: 90vw;
   font-size: 3rem;
   font-weight: bold;
