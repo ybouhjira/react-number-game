@@ -57,7 +57,6 @@ function App() {
 
     return (
         <div className="App">
-
             <h1>
                 {status === 'notStarted' && 'Random Number Game'}
                 {status === 'noResponse' && 'What is the secret number'}
@@ -82,25 +81,21 @@ function App() {
 
 
             {status !== 'win' && (
-                <>
-                    <SwapAnimation started={status !== 'notStarted'}>
-                        <button className="button" onClick={start}>
-                            Start
-                        </button>
-                        <div>
-                            <div className="input-group">
-                                <input className="number-input" type="number" value={inputValue}
-                                       onChange={e => setInputValue(Number(e.target.value))}/>
-                                <button className="ok-button" onClick={submitAnswer}>✔</button>
-                            </div>
+                <SwapAnimation started={status !== 'notStarted'}>
+                    <button className="button" onClick={start}>
+                        Start
+                    </button>
+                    <div>
+                        <div className="input-group">
+                            <input className="number-input" type="number" value={inputValue}
+                                   onChange={e => setInputValue(Number(e.target.value))}/>
+                            <button className="ok-button" onClick={submitAnswer}>✔</button>
                         </div>
-                    </SwapAnimation>
-                </>
-
+                    </div>
+                </SwapAnimation>
             )}
 
             <SwapAnimation started={status !== 'notStarted'} className="reset-button-wrapper">
-                <></>
                 <button className="button reset-button" onClick={restart}>Restart</button>
             </SwapAnimation>
         </div>
