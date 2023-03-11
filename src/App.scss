@@ -1,0 +1,11 @@
+@use 'styles/colors';
+
+.App {
+  color: white;
+  background: colors.$base-color;
+  height: 100%;
+  font-size: 60px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}

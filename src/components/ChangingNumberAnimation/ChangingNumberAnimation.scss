@@ -1,0 +1,28 @@
+@use '../../styles/mixins';
+
+$size: 100px;
+
+.rolling-animation {
+  display: inline-block;
+  @include mixins.square($size);
+  position: relative;
+
+  .random-number {
+    @include mixins.absolute-center;
+    transition: opacity 500ms ease-in-out;
+    opacity: 0;
+    &.visible {
+      opacity: 1;
+    }
+  }
+}
+
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+
+  to {
+    transform: rotate(calc(360deg * 10));
+  }
+}

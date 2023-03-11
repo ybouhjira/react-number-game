@@ -1,0 +1,8 @@
+.spinning {
+  display: inline-block;
+  animation-name: spin;
+  animation-iteration-count: infinite;
+  animation-duration: 2s;
+  animation-timing-function: cubic-bezier(1, 0, 1, 1);
+  transform-origin: center;
+}
