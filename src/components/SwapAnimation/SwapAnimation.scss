@@ -1,6 +1,5 @@
 @use "../../styles/mixins";
-
-$duration: 2s;
+@use "../../styles/settings";
 
 .wrapper {
   @include mixins.flex-center;
@@ -13,35 +12,42 @@ $duration: 2s;
   }
 
   .first {
+    pointer-events: initial;
     opacity: 1;
-    animation: fade-out $duration ease 1 normal forwards;
+    animation: fade-out settings.$number-animation-duration ease 1 normal forwards;
     animation-play-state: inherit;
   }
 
   .second {
+
+    pointer-events: none;
     @include mixins.absolute-center;
     opacity: 0;
-    animation: fade-in $duration ease 1 normal forwards;
+    animation: fade-in settings.$number-animation-duration ease 1 normal forwards;
     animation-play-state: inherit;
   }
 }
 
 @keyframes fade-in {
   from {
+    pointer-events: none;
     opacity: 0;
   }
 
   to {
+    pointer-events: initial;
     opacity: 1;
   }
 }
 
 @keyframes fade-out {
   from {
+    pointer-events: initial;
     opacity: 1;
   }
 
   to {
+    pointer-events: none;
     opacity: 0;
   }
 }

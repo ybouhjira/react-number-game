@@ -1,6 +1,8 @@
+@use "../../styles/settings";
+
 .spinning {
   display: inline-block;
-  animation: spin 2s cubic-bezier(1, 0, 1, 1) 1;
+  animation: spin settings.$number-animation-duration cubic-bezier(1, 0, 1, 1) 1;
   transform-origin: center;
   &.infinite {
     animation-iteration-count: infinite;

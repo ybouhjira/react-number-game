@@ -14,6 +14,31 @@
     text-shadow: 3px 3px 0 orange;
   }
 
+  .button {
+    display: inline-block;
+    padding: 24px !important;
+    border-radius: 10px;
+    background-image: linear-gradient( 135deg, #FCCF31 10%, #F55555 100%);
+    border: 4px solid #fffd;
+    color: white;
+    font-weight: bold;
+    text-transform: uppercase;
+    font-size: 25px;
+    cursor: pointer;
+  }
+
+  .number-input {
+    padding: 10px;
+    border-radius: 10px;
+    border: none;
+    margin: 10px;
+    font-size: 40px;
+    text-align: center;
+    font-weight: bold;
+    width: 150px;
+    color: #9708CC;
+  }
+
   color: white;
   background: linear-gradient( 135deg, #5EFCE8 10%, #736EFE 100%);
   height: 100%;

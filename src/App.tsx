@@ -1,21 +1,25 @@
-import React, {useEffect, useState} from 'react';
+import React, {useState} from 'react';
 import './App.scss';
 import ChangingNumberAnimation from "./components/ChangingNumberAnimation/ChangingNumberAnimation";
 import SpinAnimation from "./components/SpinAnimation/SpinAnimation";
 import SwapAnimation from "./components/SwapAnimation/SwapAnimation";
-import Button from "./components/Button/Button"
 
+function generateSecret() {
+    return Math.floor(Math.random() * 100 + 1);
+}
 
 function App() {
-    const [started, setStarted] = useState(false)
+    const [secret, setSecret] = useState<number | null>(null)
+    const [response, setResponse] = useState<number | undefined>()
+    const started =  !!secret;
 
     const start = () => {
-        setStarted(true);
+        setSecret(generateSecret())
     }
 
     return (
         <div className="App">
-            <h1>Random Number Game</h1>
+            <h1>{started ? 'What is the secret number' : 'Random Number Game'}</h1>
             <div className="number-animation">
                 <SwapAnimation started={started}>
                     <SpinAnimation started={started}>
@@ -24,9 +28,12 @@ function App() {
                     <SpinAnimation started={started} infinite={false}>?</SpinAnimation>
                 </SwapAnimation>
             </div>
-            <Button onClick={start}>
-                Start
-            </Button>
+            <SwapAnimation started={started}>
+                <button className="button" onClick={start}>
+                    Start
+                </button>
+                <input className="number-input" type="number" value={response} onChange={e => setResponse(Number(e.target.value))}/>
+            </SwapAnimation>
         </div>
     );
 }

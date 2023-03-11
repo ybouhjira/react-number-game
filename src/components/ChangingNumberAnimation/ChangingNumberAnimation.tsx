@@ -2,7 +2,7 @@ import "./ChangingNumberAnimation.scss"
 import {useEffect, useMemo, useRef, useState} from "react";
 import cx from "classnames";
 
-const INTERVAL = 500;
+const INTERVAL = 300;
 const COUNT = 100;
 
 const getRandomNumber = () => Math.floor(Math.random() * 90 + 10);

@@ -9,7 +9,7 @@ $size: 100px;
 
   .random-number {
     @include mixins.absolute-center;
-    transition: opacity 500ms ease-in-out;
+    transition: opacity 300ms ease-in-out;
     opacity: 0;
     &.visible {
       opacity: 1;
