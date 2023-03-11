@@ -5,10 +5,11 @@ import cx from "classnames";
 interface Props {
     children: ReactNode[]
     started?: boolean
+    className?: string
 }
 
-export default function SwapAnimation({children, started}: Props) {
-    return <div className={cx('wrapper', {started})}>
+export default function SwapAnimation({children, started, className}: Props) {
+    return <div className={cx('swap-animation', {started}, className)}>
         <div className="first">
             {children[0]}
         </div>

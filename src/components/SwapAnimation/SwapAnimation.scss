@@ -1,7 +1,7 @@
 @use "../../styles/mixins";
 @use "../../styles/settings";
 
-.wrapper {
+.swap-animation {
   @include mixins.flex-center;
   position: relative;
 
@@ -22,17 +22,12 @@
   .first {
     pointer-events: initial;
     opacity: 1;
-    //animation: fade-out settings.$number-animation-duration ease 1 normal forwards;
-    //animation-play-state: inherit;
   }
 
   .second {
     pointer-events: none;
     opacity: 0;
     @include mixins.absolute-center;
-
-    //animation: fade-in settings.$number-animation-duration ease 1 normal forwards;
-    //animation-play-state: inherit;
   }
 }
 
