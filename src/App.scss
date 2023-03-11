@@ -2,22 +2,27 @@
 @use 'styles/mixins';
 
 input[type=number] {
-  -moz-appearance: textfield;
-  appearance: textfield;
+  -moz-appearance: textfield !important;
+  appearance: textfield !important;
   margin: 0;
   &::-webkit-inner-spin-button, &::-webkit-outer-spin-button {
-    -webkit-appearance: none;
-    margin: 0;
+    -webkit-appearance: none !important;
+    margin: 0 !important;
+  }
+  &:focus-visible {
+    outline: none;
   }
 }
-
 
 .App {
 
   font-size: 16px;
   text-align: center;
-
+  display: flex;
+  justify-content: center;
+  align-items: center;
   h1 {
+    max-width: 90vw;
     font-size: 3rem;
     font-weight: bold;
 
@@ -58,6 +63,11 @@ input[type=number] {
   .input-group {
     height: 50px;
     display: flex;
+    border-radius: 10px;
+    transition: outline-width 300ms ease-out;
+    &:focus-within {
+      outline: 10px solid orange;
+    }
 
     .number-input {
       padding: 10px;
