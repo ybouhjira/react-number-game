@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useMemo, useState} from 'react';
 import './App.scss';
 import ChangingNumberAnimation from "./components/ChangingNumberAnimation/ChangingNumberAnimation";
 import SpinAnimation from "./components/SpinAnimation/SpinAnimation";
@@ -11,7 +11,20 @@ function generateSecret() {
 function App() {
     const [secret, setSecret] = useState<number | null>(null)
     const [response, setResponse] = useState<number | undefined>()
-    const [status, setStatus] = useState<'win' | 'responseBelowSecret' | 'responseGreaterThanSecret'>()
+    const status = useMemo(() => {
+        if (!response || !secret) {
+            return 'notstarted'
+        }
+
+        if (response === secret) {
+            return 'win'
+        } else if (response < secret) {
+            return 'below'
+        } else {
+            return 'greater'
+        }
+    }, [response, secret])
+
     const [inputValue, setInputValue] = useState<number | undefined>()
     const started = !!secret;
 
@@ -21,17 +34,6 @@ function App() {
 
     const submitAnswer = () => {
         setResponse(inputValue)
-        if (!response || !secret) {
-            return
-        }
-
-        if (response === secret) {
-            setStatus('win')
-        } else if (response > secret) {
-            setStatus('responseGreaterThanSecret')
-        } else {
-            setStatus('responseBelowSecret')
-        }
     }
 
     const reset = () => {
@@ -42,14 +44,18 @@ function App() {
 
     return (
         <div className="App">
+            test
+            status : {status} <br/>
+            secret : {secret} <br/>
+            response : {response} <br/>
             <h1>{!response ? (
                 started ? 'What is the secret number' : 'Random Number Game'
             ) : (
                 <>
                     {status === 'win' && 'You win!'}
                     {status !== 'win' && 'Try again!'}
-                    {status === 'responseBelowSecret' && 'Too low!'}
-                    {status === 'responseGreaterThanSecret' && 'Too High!'}
+                    {status === 'below' && 'Too low!'}
+                    {status === 'greater' && 'Too High!'}
                 </>
             )}</h1>
             <div className="number-animation">
