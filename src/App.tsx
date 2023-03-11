@@ -65,11 +65,11 @@ function App() {
             </h1>
 
 
-            <div>{status === 'below' && 'Too low!'}</div>
-            <div>{status === 'greater' && 'Too high!'}</div>
+            <div className="big-font">{status === 'below' && 'Too low!'}</div>
+            <div className="big-font">{status === 'greater' && 'Too high!'}</div>
 
             {!hasResponse(status) && (
-                <div className="number-animation">
+                <div className="big-font">
                     <SwapAnimation started={status !== 'notStarted'}>
                         <SpinAnimation started={status !== 'notStarted'}>
                             <ChangingNumberAnimation/>
@@ -89,7 +89,7 @@ function App() {
                         <div className="input-group">
                             <input className="number-input" type="number" value={inputValue}
                                    onChange={e => setInputValue(Number(e.target.value))}/>
-                            <button className="ok-button" onClick={submitAnswer}>✔</button>
+                            <button className="ok-button" onClick={submitAnswer} disabled={!inputValue}>✔</button>
                         </div>
                     </div>
                 </SwapAnimation>

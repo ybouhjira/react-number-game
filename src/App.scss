@@ -1,6 +1,17 @@
 @use 'styles/colors';
 @use 'styles/mixins';
 
+input[type=number] {
+  -moz-appearance: textfield;
+  appearance: textfield;
+  margin: 0;
+  &::-webkit-inner-spin-button, &::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+  }
+}
+
+
 .App {
 
   font-size: 16px;
@@ -74,9 +85,7 @@
   flex-direction: column;
   @include mixins.flex-center;
 
-  .number-animation {
-    font-size: 4rem;
-    height: 150px;
-    width: 150px;
+  .big-font {
+    font-size: 5rem;
   }
 }
