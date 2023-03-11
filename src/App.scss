@@ -86,6 +86,10 @@ input[type=number] {
       background: white;
       border: none;
       font-size: 40px;
+
+      &:disabled {
+        color: grey
+      }
     }
   }
 

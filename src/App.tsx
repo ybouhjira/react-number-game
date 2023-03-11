@@ -1,4 +1,4 @@
-import React, {useMemo, useState} from 'react';
+import React, {ChangeEvent, useMemo, useState} from 'react';
 import './App.scss';
 import ChangingNumberAnimation from "./components/ChangingNumberAnimation/ChangingNumberAnimation";
 import SpinAnimation from "./components/SpinAnimation/SpinAnimation";
@@ -55,6 +55,12 @@ function App() {
         setInputValue('')
     }
 
+    const handleInputChange = ({target: {valueAsNumber: value}, }: ChangeEvent<HTMLInputElement>) => {
+        if (1 <= value && value <= 100) {
+            setInputValue(value)
+        }
+    };
+
     return (
         <div className="App">
             <h1>
@@ -87,8 +93,12 @@ function App() {
                     </button>
                     <div>
                         <div className="input-group">
-                            <input className="number-input" type="number" value={inputValue}
-                                   onChange={e => setInputValue(Number(e.target.value))}/>
+                            <input min={1}
+                                   max={100}
+                                   className="number-input"
+                                   type="number"
+                                   value={inputValue}
+                                   onInput={handleInputChange}/>
                             <button className="ok-button" onClick={submitAnswer} disabled={!inputValue}>✔</button>
                         </div>
                     </div>
