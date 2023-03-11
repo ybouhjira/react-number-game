@@ -49,7 +49,7 @@ function App() {
         setInputValue('')
     }
 
-    const reset = () => {
+    const restart = () => {
         setResponse(undefined)
         setSecret(undefined)
         setInputValue('')
@@ -58,14 +58,12 @@ function App() {
     return (
         <div className="App">
 
-            <h1>{!response ? (
-                status === 'notStarted' ? 'What is the secret number' : 'Random Number Game'
-            ) : (
-                <>
-                    {status === 'win' && 'You win!'}
-                    {status !== 'win' && 'Try again!'}
-                </>
-            )}</h1>
+            <h1>
+                {status === 'notStarted' && 'Random Number Game'}
+                {status === 'noResponse' && 'What is the secret number'}
+                {status === 'win' && 'You win!'}
+                {(status === 'greater' || status === 'below') && 'Try again!'}
+            </h1>
 
 
             <div>{status === 'below' && 'Too low!'}</div>
@@ -97,13 +95,14 @@ function App() {
                             </div>
                         </div>
                     </SwapAnimation>
-                    <SwapAnimation started={status !== 'notStarted'} className="reset-button-wrapper">
-                        <></>
-                        <button className="button reset-button" onClick={reset}>Reset</button>
-                    </SwapAnimation>
                 </>
 
             )}
+
+            <SwapAnimation started={status !== 'notStarted'} className="reset-button-wrapper">
+                <></>
+                <button className="button reset-button" onClick={restart}>Restart</button>
+            </SwapAnimation>
         </div>
     );
 }
