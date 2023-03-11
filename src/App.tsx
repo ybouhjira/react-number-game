@@ -8,7 +8,7 @@ import Game from "./Game";
 type Action = { type: 'start' }
     | { type: 'restart' }
     | { type: 'submitAnswer' }
-    | { type: 'inputValueChanged', value: number | '' }
+    | { type: 'setInputValue', value: number | '' }
 
 function GameReducer(game: Game, action: Action): Game {
     switch (action.type) {
@@ -16,7 +16,7 @@ function GameReducer(game: Game, action: Action): Game {
             return game.start()
         case "submitAnswer":
             return game.submitAnswer()
-        case "inputValueChanged":
+        case "setInputValue":
             return game.setInputValue(action.value)
         case "restart":
             return game.restart()
@@ -46,9 +46,9 @@ function App() {
     const handleInputChange = ({target: {valueAsNumber: value}}: ChangeEvent<HTMLInputElement>) => {
         console.log({value})
         if(isNaN(value)) {
-            dispatch({type: 'inputValueChanged', value: ''})
+            dispatch({type: 'setInputValue', value: ''})
         } else if (1 <= value && value <= 100) {
-            dispatch({type: 'inputValueChanged', value})
+            dispatch({type: 'setInputValue', value})
         }
     };
 
