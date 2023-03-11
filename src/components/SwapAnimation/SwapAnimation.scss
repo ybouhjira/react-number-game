@@ -1,0 +1,43 @@
+@use "../../styles/mixins";
+
+$duration: 2s;
+
+.wrapper {
+  @include mixins.flex-center;
+
+  border: 2px solid red;
+
+  .first, .second {
+    position: absolute;
+  }
+
+  .first {
+    opacity: 1;
+    animation: fade-out $duration ease 1 normal forwards;
+  }
+
+  .second {
+    opacity: 0;
+    animation: fade-in $duration ease 1 normal forwards;
+  }
+}
+
+@keyframes fade-in {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes fade-out {
+  from {
+    opacity: 1;
+  }
+
+  to {
+    opacity: 0;
+  }
+}

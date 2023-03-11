@@ -6,6 +6,11 @@
   text-align: center;
 }
 
+@mixin flex-center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
 @mixin square($size) {
   width: $size;
   height: $size;

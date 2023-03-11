@@ -1,8 +1,18 @@
 .spinning {
   display: inline-block;
-  animation-name: spin;
-  animation-iteration-count: infinite;
-  animation-duration: 2s;
-  animation-timing-function: cubic-bezier(1, 0, 1, 1);
+  animation: spin 2s cubic-bezier(1, 0, 1, 1) 1;
   transform-origin: center;
+  &.infinite {
+    animation-iteration-count: infinite;
+  }
+}
+
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+
+  to {
+    transform: rotate(calc(360deg * 10));
+  }
 }

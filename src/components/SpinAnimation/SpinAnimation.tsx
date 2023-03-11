@@ -1,9 +1,15 @@
-import {ReactElement} from "react";
+import {ReactNode} from "react";
 import cx from "classnames";
 import "./SpinAnimation.scss"
 
-export default function SpinAnimation({children, started}: { children: ReactElement, started: boolean }) {
-    return <div className={cx({spinning: started})}>
+interface Props {
+    children: ReactNode;
+    started?: boolean;
+    infinite?: boolean;
+}
+
+export default function SpinAnimation({children, started = false, infinite = true}: Props) {
+    return <div className={cx({spinning: started, infinite})}>
         {children}
     </div>
 }
