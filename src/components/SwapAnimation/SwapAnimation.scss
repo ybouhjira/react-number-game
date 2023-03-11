@@ -4,21 +4,25 @@ $duration: 2s;
 
 .wrapper {
   @include mixins.flex-center;
+  position: relative;
 
-  border: 2px solid red;
+  justify-content: space-around;
 
-  .first, .second {
-    position: absolute;
+  &:not(.started) {
+    animation-play-state: paused;
   }
 
   .first {
     opacity: 1;
     animation: fade-out $duration ease 1 normal forwards;
+    animation-play-state: inherit;
   }
 
   .second {
+    @include mixins.absolute-center;
     opacity: 0;
     animation: fade-in $duration ease 1 normal forwards;
+    animation-play-state: inherit;
   }
 }
 

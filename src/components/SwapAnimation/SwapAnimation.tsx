@@ -1,12 +1,14 @@
-import {ReactElement, ReactNode} from "react";
+import {ReactNode} from "react";
 import "./SwapAnimation.scss"
+import cx from "classnames";
 
 interface Props {
     children: ReactNode[]
+    started?: boolean
 }
 
-export default function SwapAnimation({children}: Props) {
-    return <div className="wrapper">
+export default function SwapAnimation({children, started}: Props) {
+    return <div className={cx('wrapper', {started})}>
         <div className="first">
             {children[0]}
         </div>
