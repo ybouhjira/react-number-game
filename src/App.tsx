@@ -1,12 +1,13 @@
 import React, {useReducer} from 'react';
-import './App.scss';
 import SwapAnimation from "./components/SwapAnimation/SwapAnimation";
 import Game from "./Game";
-import Heading from "./components/Heading";
+import Heading from "./components/Heading/Heading";
 import {TooHighTooLow} from "./components/TooHighTooLow/TooHighTooLow";
 import {NumberAnimation} from "./components/NumberAnimation/NumberAnimation";
 import {NumberInput} from "./components/NumberInput/NumberInput";
 import {GameReducer} from "./GameReducer";
+import './App.scss';
+import "./Button.scss"
 
 function App() {
     const [game, dispatch] = useReducer(GameReducer, new Game())

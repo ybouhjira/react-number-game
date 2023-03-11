@@ -15,91 +15,20 @@ input[type=number] {
 }
 
 .App {
-
   font-size: 16px;
   text-align: center;
   display: flex;
   justify-content: center;
   align-items: center;
-  h1 {
-    max-width: 90vw;
-    font-size: 3rem;
-    font-weight: bold;
-
-    color: white;
-    text-shadow: 3px 3px 0 orange;
-  }
-
-  .button {
-    transition: transform 200ms ease;
-    &:hover {
-      transform: scale(1.2);
-    }
-    margin: 10px;
-    display: inline-block;
-    padding: 24px;
-    border-radius: 10px;
-    background-image: linear-gradient( 135deg, #FCCF31 10%, #F55555 100%);
-    border: 4px solid #fffd;
-    color: white;
-    font-weight: bold;
-    text-transform: uppercase;
-    font-size: 25px;
-    cursor: pointer;
-
-
-    &.reset-button {
-      padding: 10px;
-      background: linear-gradient( 135deg, #92FFC0 10%, #002661 100%);
-      bottom: 20px;
-
-    }
-  }
 
   .reset-button-wrapper {
     position: absolute;
     bottom: 50px;
   }
-  .input-group {
-    height: 50px;
-    display: flex;
-    border-radius: 10px;
-    transition: outline-width 300ms ease-out;
-    &:focus-within {
-      outline: 10px solid orange;
-    }
-
-    .number-input {
-      padding: 10px;
-      border-radius: 10px 0 0 10px;
-      border: none;
-      font-size: 40px;
-      text-align: center;
-      font-weight: bold;
-      width: 150px;
-      color: #9708CC;
-    }
-
-    .ok-button {
-      color: green;
-      border-radius: 0px 10px 10px 0;
-      background: white;
-      border: none;
-      font-size: 40px;
-
-      &:disabled {
-        color: grey
-      }
-    }
-  }
 
   color: white;
-  background: linear-gradient( 135deg, #5EFCE8 10%, #736EFE 100%);
+  background: linear-gradient(135deg, #5EFCE8 10%, #736EFE 100%);
   height: 100%;
   flex-direction: column;
   @include mixins.flex-center;
-
-  .big-font {
-    font-size: 5rem;
-  }
 }

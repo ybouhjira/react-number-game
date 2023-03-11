@@ -1,0 +1,32 @@
+.input-group {
+  height: 50px;
+  display: flex;
+  border-radius: 10px;
+  transition: outline-width 300ms ease-out;
+  &:focus-within {
+    outline: 10px solid orange;
+  }
+
+  .number-input {
+    padding: 10px;
+    border-radius: 10px 0 0 10px;
+    border: none;
+    font-size: 40px;
+    text-align: center;
+    font-weight: bold;
+    width: 150px;
+    color: #9708CC;
+  }
+
+  .ok-button {
+    color: green;
+    border-radius: 0px 10px 10px 0;
+    background: white;
+    border: none;
+    font-size: 40px;
+
+    &:disabled {
+      color: grey
+    }
+  }
+}

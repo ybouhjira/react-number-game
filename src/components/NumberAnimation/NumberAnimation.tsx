@@ -2,6 +2,7 @@ import SwapAnimation from "../SwapAnimation/SwapAnimation";
 import SpinAnimation from "../SpinAnimation/SpinAnimation";
 import ChangingNumberAnimation from "../ChangingNumberAnimation/ChangingNumberAnimation";
 import React from "react";
+import "./NumberAnimation.scss"
 
 interface Props {
     status: any;

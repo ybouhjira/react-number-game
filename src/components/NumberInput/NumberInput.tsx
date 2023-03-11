@@ -1,4 +1,5 @@
 import React, {ChangeEvent} from "react";
+import "./NumberInput.scss"
 
 interface Props {
     setValue: (value: number) => void
