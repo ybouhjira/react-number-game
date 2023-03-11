@@ -2,14 +2,16 @@ import React, {ChangeEvent} from "react";
 import "./NumberInput.scss"
 
 interface Props {
-    setValue: (value: number) => void
+    setValue: (value: number | '') => void
     onClick: () => void;
     inputValue: number | '';
 }
 
 export function NumberInput({setValue, onClick, inputValue}: Props) {
     const handleInputChange = ({target: {valueAsNumber: value}}: ChangeEvent<HTMLInputElement>) => {
-        if (1 <= value && value <= 100)
+        if (isNaN(value))
+            setValue('')
+        if ((1 <= value && value <= 100))
             setValue(value)
     }
 
@@ -17,7 +19,7 @@ export function NumberInput({setValue, onClick, inputValue}: Props) {
         <form onSubmit={(e) => {
             e.preventDefault()
             onClick()
-        }} style={{display: 'flex'}}>
+        }} className="form">
             <input min={1}
                    max={100}
                    className="number-input"
@@ -25,6 +27,7 @@ export function NumberInput({setValue, onClick, inputValue}: Props) {
                    value={inputValue}
                    onInput={handleInputChange}
                    onKeyDown={(e) => ["e", "E"].includes(e.key) && e.preventDefault()}
+                   onKeyUp={() => new Audio('./type.wav').play()}
             />
             <button className="ok-button" type="submit" disabled={!inputValue}>✔</button>
         </form>
